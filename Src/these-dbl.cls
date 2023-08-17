@@ -34,7 +34,8 @@
 \RequirePackage{titlesec}
 \RequirePackage{parcolumns}
 \RequirePackage{multicol}
-\RequirePackage[T1]{fontenc} % permet de sp\'{e}cifier \`{a} LaTeX l'utilisation du codage de caract\`{e}res T1, nouvelle norme LaTeX non utilis\'{e}e par d\'{e}faut pour des raisons de compatibilit\'{e} avec les anciens documents LaTeX.
+\RequirePackage{fontspec}
+\setmainfont{NewCM10-Book}
 \RequirePackage{lmodern} % Assurer une bonne impression!
 \RequirePackage{tikz} % tikz est utilise pour tracer des boites, par exemple
 \usetikzlibrary{fadings,babel}
@@ -68,9 +69,9 @@
 \FrenchFootnotes
 
 % Define commands to set fonts throughout the document
-\newcommand*{\selectfontfrontcover}{\fontfamily{phv}\selectfont}  % Font style used in front cover 
-\newcommand*{\selectfontbackcover}{\fontfamily{phv}\selectfont}   % Font style used in back cover 
-\newcommand*{\selectfontchapheads}{\fontfamily{phv}\selectfont} % Font style used chapter headings
+\newcommand*{\selectfontfrontcover}{\setmainfont{Helvetica}}  % Font style used in front cover 
+\newcommand*{\selectfontbackcover}{\setmainfont{Helvetica}}   % Font style used in back cover 
+\newcommand*{\selectfontchapheads}{\setmainfont{Helvetica}} % Font style used chapter headings
 
 % Override default font here if you want
 %\renewcommand{\rmdefault}{qpl}
@@ -159,14 +160,16 @@
 \RequirePackage[hyperref,backend=biber,
   % Exemples de styles: alphabetic, ieee, nature, numeric, verbose-trad1 (en utilisant \footcite{}).
   % https://www.overleaf.com/learn/latex/Biblatex_bibliography_styles
-  style=verbose-trad1
+  style=authoryear, refsection=chapter
   ]{biblatex}
+  \renewcommand*{\citesetup}{\small}
+  \renewcommand*{\bibfont}{\small}
 
 % Style biblatex avec gestion des mots cl\'{e}s des entr\'{e}es bibliographiques
 % + les abbr\'{e}viations idem, ibidem, op cit. Pr\'{e}voir un fichier bib
 % contenant ces mots-cl\'{e}s, ici primary et secondary.
-\defbibheading{primary}{\section*{Sources primaires}}
-\defbibheading{secondary}{\section*{Sources secondaires}}
+% \defbibheading{primary}{\section*{Sources primaires}}
+% \defbibheading{secondary}{\section*{Sources secondaires}}
 
 
 %%%% Ajustements pour la bibliographie
@@ -178,7 +181,7 @@
 %\DeclareFieldFormat{pages}{page(s): #1} % page(s) en toutes lettres, si on veut...
 
 % Locutions latines en italique (comme ibid, loc.cit. , etc.) Merci \`{a} Josquin Debaz
-\renewcommand{\mkibid}[1]{\emph{#1}}
+% \renewcommand{\mkibid}[1]{\emph{#1}}
 
 % Et pour mettre le in en italique dans la ref\'{e}rence biblio (merci encore \`{a} Josquin Debaz)
 \DefineBibliographyStrings{english}{%

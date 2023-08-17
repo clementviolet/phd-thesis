@@ -17,10 +17,11 @@ convert_latex_to_pdf() {
 
     cd Src
 
-    pdflatex main.tex
-    biber main.bcf 
-    pdflatex main.tex
-    pdflatex main.tex
+    # pdflatex main.tex
+    lualatex main.tex
+    biber main.bcf
+    lualatex main.tex
+    lualatex main.tex 
     rm -f main.{ps,bcf,run.xml}
 
     # Cleaning -up

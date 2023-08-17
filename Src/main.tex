@@ -17,6 +17,9 @@
 % Specify you bibliography files here
 \addbibresource{./biblio.bib}
 
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
 \begin{document}
 \pagenumbering{gobble}
 % Page de garde avec commande \maketitle
@@ -44,50 +47,29 @@
 
 \clearemptydoublepage
 \mainmatter
-\begin{refsection}
-\clearemptydoublepage
+
 \input{./02-Introduction/introduction}
-\clearemptydoublepage
-\addcontentsline{toc}{section}{Bibliographie}
-\printbibliography[heading=subbibliography, title={Bibliographie}]
-\end{refsection}
 
-\begin{refsection}
+\printbibliography[heading=subbibintoc, title={Bibliographie}]
 \clearemptydoublepage
+
 \input{./03-Chapitre1/chapitre1}
-\addcontentsline{toc}{section}{Bibliographie}
-\printbibliography[heading=subbibliography, title={Bibliographie}]
-\end{refsection}
-
+\printbibliography[heading=subbibintoc, title={Bibliographie}]
 \clearemptydoublepage
-\begin{refsection}
+
 \input{./03-Chapitre2/chapitre2}
-\addcontentsline{toc}{section}{Bibliographie}
-\printbibliography[heading=subbibliography, title={Bibliographie}]
-\end{refsection}
-
+\printbibliography[heading=subbibintoc, title={Bibliographie}]
 \clearemptydoublepage
-\begin{refsection}
+
 \input{./03-Chapitre3/chapitre3}
-\addcontentsline{toc}{section}{Bibliographie}
-\printbibliography[heading=subbibliography, title={Bibliographie}]
-\end{refsection}
-
+\printbibliography[heading=subbibintoc, title={Bibliographie}]
 
 \clearemptydoublepage
-\backmatter
+
 \input{./04-Conclusion/conclusion}
+\printbibliography[heading=subbibintoc, title={Bibliographie}]
 
-% Chapitre pour la bibliographie
-% Bibliography chapter
-\clearemptydoublepage
-\phantomsection % To have a correct link in the table of contents
-\addcontentsline{toc}{chapter}{Bibliographie}
-
-% nocite: Pour citer la totalit\'{e} des r\'{e}f\'{e}rences contenues dans le fichier biblio
-% nocite: In order to cite all the references included biblio
-\nocite{*}
-\printbibliography
+\backmatter
 
 \clearemptydoublepage
 % Pour avoir la quatrième de couverture sur une page paire
