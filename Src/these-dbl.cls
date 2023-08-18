@@ -28,6 +28,8 @@
 
 \RequirePackage[utf8]{inputenc} 
 \RequirePackage[english,french]{babel} % Last language is the default, use \selectlanguage{english} to switch
+\RequirePackage{amsmath}
+\RequirePackage[soul]{lua-ul}
 \RequirePackage{ifpdf}
 \RequirePackage[usenames,dvipsnames]{color} % pour les couleurs
 \RequirePackage{textcomp}
@@ -41,7 +43,6 @@
 \usetikzlibrary{fadings,babel}
 \RequirePackage{fix-cm}
 \RequirePackage{abstract}
-\RequirePackage{graphicx} % Pour ins\'{e}rer des images. Utiliser le format jpg pour plus de simplicit\'{e}.
 \RequirePackage{sectsty} % obligatoire, pour jouer avec l'apparence des titres
 \RequirePackage{shorttoc} % pour le sommaire, au debut.
 \RequirePackage{fancyhdr} % Afin de r\'{e}aliser soi-même les en-têtes et pieds de page, voir chaque d\'{e}but de chapitre.
@@ -51,6 +52,7 @@
 \RequirePackage{wallpaper}
 \RequirePackage[inner=30mm,outer=20mm,top=30mm,bottom=20mm]{geometry}
 %Ou bien : \RequirePackage[top=4 cm, bottom=4 cm, left=3 cm, right=3 cm]{geometry} % On peut modifier ces valeurs pour augmenter ou r\'{e}duire les marges. Attention aux en-têtes de chapitres. 
+\RequirePackage{pdflscape}
 \RequirePackage{epigraph} % \cleartoevenpage
 
 \RequirePackage{setspace} % permet d'utiliser les commandes \spacing, doublespace (double interligne), singlespace (simple interligne) et onehalfspace (un interligne et demi)
@@ -77,8 +79,30 @@
 %\renewcommand{\rmdefault}{qpl}
 %\renewcommand{\sfdefault}{qpl} 
 
+\RequirePackage{longtable} % Pour des tableaux sur plusieurs pages
+\RequirePackage{booktabs}
+\RequirePackage{array}
+\usepackage{multirow}
+\RequirePackage{calc} % for calculating minipage widths
+\RequirePackage{caption}
+% Make caption package work with longtable
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
 
-
+\RequirePackage{graphicx} % Pour ins\'{e}rer des images. Utiliser le format jpg pour plus de simplicit\'{e}.
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%% CONDITIONAL COMPILATION %%%%%%%%%%%%%%%
 \RequirePackage{xparse}

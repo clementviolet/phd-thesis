@@ -9,7 +9,7 @@ convert_markdown_to_latex() {
 ## Function to convert LaTeX to MS Word and move the file
 convert_markdown_to_word() {
     pandoc -f markdown -t docx "$1" -o "$2" --filter pandoc-crossref --citeproc --bibliography=Src/biblio.bib
-    mv "$2" Rendered/Word/
+    mv "$2" Rendered/MSWord/
 }
 
 ## Function to convert LaTeX to PDF and clean up
@@ -44,7 +44,10 @@ if [ "$1" == "latex" ] || [ "$1" == "pdf" ]; then
     # Convert Markdown to LaTeX
     convert_markdown_to_latex "Src/01-Acknowledgement/acknowledgement.md" "Src/01-Acknowledgement/acknowledgement.tex"
     convert_markdown_to_latex "Src/02-Introduction/introduction.md" "Src/02-Introduction/introduction.tex"
-    convert_markdown_to_latex "Src/03-Chapitre1/chapitre1.md" "Src/03-Chapitre1/chapitre1.tex"
+    echo '' > Src/03-Chapitre1/chapitre1.md
+    pandoc -f markdown -t latex Src/03-Chapitre1/chapitre1.md -o Src/03-Chapitre1/chapitre1.md --template Src/03-Chapitre1/table_template.md -V latex
+    pandoc -f markdown -t latex Src/03-Chapitre1/before_table.md Src/03-Chapitre1/chapitre1.md Src/03-Chapitre1/after_table.md -o Src/03-Chapitre1/chapitre1.tex --top-level-division=chapter --filter pandoc-crossref --citeproc --biblatex --bibliography=Src/biblio.bib
+    # convert_markdown_to_latex "Src/03-Chapitre1/chapitre1.md" "Src/03-Chapitre1/chapitre1.tex"
     convert_markdown_to_latex "Src/03-Chapitre2/chapitre2.md" "Src/03-Chapitre2/chapitre2.tex"
     convert_markdown_to_latex "Src/03-Chapitre3/chapitre3.md" "Src/03-Chapitre3/chapitre3.tex"
     convert_markdown_to_latex "Src/04-Conclusion/conclusion.md" "Src/04-Conclusion/conclusion.tex"
@@ -59,21 +62,38 @@ elif [ "$1" == "docx" ]; then
             convert_markdown_to_word "Src/02-Introduction/introduction.md" "02-introduction.docx"
             chapters=("chapitre1" "chapitre2" "chapitre3")
             for chapter in "${chapters[@]}"; do
+
+                if [ "$chapter" == "chapitre1" ]; then
+
+                    echo '' > Src/03-Chapitre1/chapitre1.md
+                    pandoc -f markdown -t latex Src/03-Chapitre1/chapitre1.md -o Src/03-Chapitre1/chapitre1.md --template Src/03-Chapitre1/table_template.md -V docx
+                    pandoc -f markdown -t docx Src/03-Chapitre1/before_table.md Src/03-Chapitre1/chapitre1.md Src/03-Chapitre1/after_table.md -o Src/03-Chapitre1/chapitre1.docx --top-level-division=chapter --filter pandoc-crossref --citeproc --biblatex --bibliography=Src/biblio.bib
+                    mv Src/03-Chapitre1/chapitre1.tex Rendered/MSWord/
                 convert_markdown_to_word "Src/03-$chapter/$chapter.md" "03-$chapter.docx"
             done
             convert_markdown_to_word "Src/04-Conclusion/conclusion.md" "04-conclusion.docx"
             ;;
         standalone)
+            echo '' > Src/03-Chapitre1/chapitre1.md
+            pandoc -f markdown -t latex Src/03-Chapitre1/chapitre1.md -o Src/03-Chapitre1/chapitre1.md --template Src/03-Chapitre1/table_template.md -V docx
+            pandoc -f markdown -t docx Src/03-Chapitre1/before_table.md Src/03-Chapitre1/chapitre1.md Src/03-Chapitre1/after_table.md -o Src/03-Chapitre1/chapitre1.docx --top-level-division=chapter --filter pandoc-crossref --citeproc --biblatex --bibliography=Src/biblio.bib
             pandoc -f markdown -t docx Src/02-Introduction/introduction.md \
-                Src/03-Chapitre1/chapitre1.md Src/03-Chapitre2/chapitre2.md \
-                Src/03-Chapitre3/chapitre3.md \
-                Src/04-Conclusion/conclusion.md -o Rendered/Word/05-Standalone.docx \
+                Src/03-Chapitre1/before_table.md Src/03-Chapitre1/chapitre1.md \ 
+                Src/03-Chapitre1/after_table.md Src/03-Chapitre2/chapitre2.md \
+                Src/03-Chapitre3/chapitre3.md Src/04-Conclusion/conclusion.md \
+                -o Rendered/MSWord/05-Standalone.docx \
                 --filter pandoc-crossref --citeproc --bibliography=Src/biblio.bib
             ;;
         introduction)
             convert_markdown_to_word "Src/02-${2}/${2}.md" "02-${2}.docx"
             ;;
-        chapitre1|chapitre2|chapitre3)
+        chapitre1)
+            echo '' > Src/03-Chapitre1/chapitre1.md
+            pandoc -f markdown -t latex Src/03-Chapitre1/chapitre1.md -o Src/03-Chapitre1/chapitre1.md --template Src/03-Chapitre1/table_template.md -V docx
+            pandoc -f markdown -t docx Src/03-Chapitre1/before_table.md Src/03-Chapitre1/chapitre1.md Src/03-Chapitre1/after_table.md -o Src/03-Chapitre1/chapitre1.docx --top-level-division=chapter --filter pandoc-crossref --citeproc --biblatex --bibliography=Src/biblio.bib
+            mv Src/03-Chapitre1/chapitre1.tex Rendered/MSWord/
+            ;;
+        chapitre2|chapitre3)
             convert_markdown_to_word "Src/03-${2}/${2}.md" "03-${2}.docx"
             ;;
         conclusion)
