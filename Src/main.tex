@@ -52,7 +52,10 @@
 \printbibliography[heading=subbibintoc, title={Bibliographie}]
 \clearemptydoublepage
 
+\newcounter{saved_pages}
+\setcounter{saved_pages}{\value{page}}
 \mainmatter
+\setcounter{page}{\value{saved_pages}}
 
 \input{./03-Chapitre1/chapitre1}
 \clearpage
