@@ -1,0 +1,6 @@
+figureTitle: "Figure"
+tableTitle: "Table"
+figPrefix: "Fig."
+eqnPrefix: "Eq."
+tblPrefix: "Table"
+linkReferences: true

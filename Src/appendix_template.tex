@@ -1,0 +1,39 @@
+
+% Start of subappendices environment
+\AtBeginEnvironment{subappendices}{%
+\chapter*{Appendices}
+\addcontentsline{toc}{chapter}{Appendices}
+}
+
+% Temporary removing figs and table from lof and lot
+\captionsetup[figure]{list=no}
+\captionsetup[table]{list=no}
+
+% Add 'S' prefix before figures and tables
+\renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\thetable}{S\arabic{table}}   
+
+% Remove the chapter part of the counter
+\setcounter{figure}{0}
+\setcounter{table}{0}
+
+$body$
+
+% Restore all parameters as default
+\captionsetup[figure]{list=yes}
+\captionsetup[table]{list=yes}
+
+\renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\thetable}{\arabic{table}}   
+
+% \setcounter{figure}{\value{savedfigure}}
+% \setcounter{table}{\value{savedtable}}
+\counterwithin{figure}{chapter}
+\counterwithin{table}{chapter}
+
+% End of subappendices environment
+\AtEndEnvironment{subappendices}{%
+}
+
+\printbibliography[title={Bibliographie}]
+
