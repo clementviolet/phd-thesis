@@ -43,38 +43,54 @@
 \tableofcontents %sommaire %table of content
 \listoffigures
 \listoftables
-%\shorttableofcontents{Sommaire}{0}
 
 \clearemptydoublepage
-\pagenumbering{arabic}
+
+\mainmatter
+
+%%%%%%%%% Introduction
+
 \input{./02-Introduction/introduction}
 \clearpage
-\printbibliography[heading=subbibintoc, title={Bibliographie}]
+% \printbibliography[heading=subbibintoc, title={Bibliographie}]
 \clearemptydoublepage
 
-\newcounter{saved_pages}
-\setcounter{saved_pages}{\value{page}}
-\mainmatter
-\setcounter{page}{\value{saved_pages}}
+%%%%%%%%% Chapter 1
 
 \input{./03-Chapitre1/chapitre1}
 \clearpage
-\printbibliography[heading=subbibintoc, title={Bibliographie}]
+\input{./03-Chapitre1/Suppinfo.tex}
+
+\subsection*{Bibliographie}
+\printbibliography[heading=none]
+
 \clearemptydoublepage
+
+%%%%%%%%% Chapter 2
 
 \input{./03-Chapitre2/chapitre2}
 \clearpage
-\printbibliography[heading=subbibintoc, title={Bibliographie}]
+\input{./03-Chapitre2/Suppinfo.tex}
+
+\subsection*{Bibliographie}
+\printbibliography[heading=none]
+
 \clearemptydoublepage
+
+%%%%%%%%% Chapter 3
 
 \input{./03-Chapitre3/chapitre3}
 \clearpage
-\printbibliography[heading=subbibintoc, title={Bibliographie}]
+\input{./03-Chapitre3/Suppinfo.tex}
+
+\subsection*{Bibliographie}
+\printbibliography[heading=none]
+
 \clearemptydoublepage
 
+%%%%%%%%% Discussion
+
 \input{./04-Conclusion/conclusion}
-\clearpage
-\printbibliography[heading=subbibintoc, title={Bibliographie}]
 
 \backmatter
 

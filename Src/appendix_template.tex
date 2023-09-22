@@ -5,6 +5,12 @@
 \addcontentsline{toc}{chapter}{Appendices}
 }
 
+% Modify the section mark for Appendix
+\let\oldsectionmark\sectionmark % Save current sectionmark behavior
+\renewcommand{\sectionmark}[1]{\markright{Appendix}}
+
+\sectionmark{Appendix}
+
 % Temporary removing figs and table from lof and lot
 \captionsetup[figure]{list=no}
 \captionsetup[table]{list=no}
@@ -20,6 +26,9 @@
 $body$
 
 % Restore all parameters as default
+
+\let\sectionmark\oldsectionmark
+
 \captionsetup[figure]{list=yes}
 \captionsetup[table]{list=yes}
 
@@ -34,6 +43,3 @@ $body$
 % End of subappendices environment
 \AtEndEnvironment{subappendices}{%
 }
-
-\printbibliography[title={Bibliographie}]
-

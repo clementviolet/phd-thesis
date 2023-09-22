@@ -188,7 +188,7 @@
 \RequirePackage[hyperref,backend=biber,
   % Exemples de styles: alphabetic, ieee, nature, numeric, verbose-trad1 (en utilisant \footcite{}).
   % https://www.overleaf.com/learn/latex/Biblatex_bibliography_styles
-  style=apa, refsection=chapter
+  style=apa, %refsection=chapter
   ]{biblatex}
   \renewcommand*{\citesetup}{\small}
   \renewcommand*{\bibfont}{\small}
