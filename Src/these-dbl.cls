@@ -30,6 +30,7 @@
 \RequirePackage[english,french]{babel} % Last language is the default, use \selectlanguage{english} to switch
 \RequirePackage{amsmath}
 \RequirePackage[soul]{lua-ul}
+\usepackage{appendix}
 \RequirePackage{ifpdf}
 \RequirePackage[usenames,dvipsnames]{color} % pour les couleurs
 \RequirePackage{textcomp}
@@ -50,6 +51,7 @@
 \RequirePackage{color}
 \RequirePackage{comment}
 \RequirePackage{wallpaper}
+\RequirePackage{float}
 \RequirePackage[inner=30mm,outer=20mm,top=30mm,bottom=20mm]{geometry}
 %Ou bien : \RequirePackage[top=4 cm, bottom=4 cm, left=3 cm, right=3 cm]{geometry} % On peut modifier ces valeurs pour augmenter ou r\'{e}duire les marges. Attention aux en-têtes de chapitres. 
 \RequirePackage{pdflscape}
@@ -80,6 +82,7 @@
 %\renewcommand{\sfdefault}{qpl} 
 
 \RequirePackage{longtable} % Pour des tableaux sur plusieurs pages
+\RequirePackage{threeparttable} % Pour ajouter des notes en bas de tableau
 \RequirePackage{booktabs}
 \RequirePackage{array}
 \usepackage{multirow}
@@ -101,7 +104,8 @@
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 % Set default figure placement to htbp
 \makeatletter
-\def\fps@figure{htbp}
+% \def\fps@figure{htbp}
+\def\fps@figure{H}
 \makeatother
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%% CONDITIONAL COMPILATION %%%%%%%%%%%%%%%
