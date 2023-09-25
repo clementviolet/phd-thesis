@@ -107,6 +107,29 @@
 % \def\fps@figure{htbp}
 \def\fps@figure{H}
 \makeatother
+
+% Page break before a new section
+%% Except if preceded by a chapter
+\RequirePackage{etoolbox}
+
+\newtoggle{chapterjustused}
+\newtoggle{sectionnewpage}
+
+\togglefalse{chapterjustused} % Initial state: chapter was not just used
+\toggletrue{sectionnewpage}   % Initial state: sections start on new pages
+
+% Toggle on before a chapter
+\pretocmd{\chapter}{\toggletrue{chapterjustused}}{}{}
+
+% Conditionally add page break before a section and reset toggle
+\pretocmd{\section}{
+  \iftoggle{sectionnewpage}{
+    \iftoggle{chapterjustused}{}{\clearpage}
+  }{}
+  \togglefalse{chapterjustused}
+}{}{}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%% CONDITIONAL COMPILATION %%%%%%%%%%%%%%%
 \RequirePackage{xparse}
@@ -532,7 +555,6 @@
 
 %%%%%%%%%% Gerer les en tetes dans les frontmatter mainmatter et backmatter
 \RequirePackage{geometry}
-\RequirePackage{etoolbox}
 
 \appto\frontmatter{\pagenumbering{roman}
 \pagestyle{fancy}
