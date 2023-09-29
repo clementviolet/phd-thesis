@@ -20,6 +20,9 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
+\newlength{\originalparskip}
+\setlength{\originalparskip}{\parskip}
+
 \begin{document}
 \pagenumbering{gobble}
 % Page de garde avec commande \maketitle
@@ -32,8 +35,8 @@
 
 % Inclusion du chapitre remerciement
 % Input acknowledgement chapter
-\clearemptydoublepage
-\input{./01-Acknowledgement/acknowledgement}
+% \clearemptydoublepage
+% \input{./01-Acknowledgement/acknowledgement}
 
 \clearemptydoublepage
 % Ne pas oublier cette commande qui g\'{e}n\`{e}re la page de couverture avant
@@ -47,6 +50,8 @@
 \clearemptydoublepage
 
 \mainmatter
+
+\setlength{\parskip}{\baselineskip}
 
 %%%%%%%%% Introduction
 
@@ -88,11 +93,18 @@
 
 \clearemptydoublepage
 
-%%%%%%%%% Discussion
+%%%%%%%% Discussion
 
 \input{./04-Conclusion/conclusion}
 
-\backmatter
+% % \subsection*{Bibliographie}
+% % \printbibliography[heading=none]
+
+\clearemptydoublepage
+
+%%%%%%%% Quatrieme de couverture
+
+\setlength{\parskip}{\originalparskip}\togglefalse{sectionnewpage}\backmatter
 
 \clearemptydoublepage
 % Pour avoir la quatrième de couverture sur une page paire
