@@ -20,8 +20,9 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
-\newlength{\originalparskip}
-\setlength{\originalparskip}{\parskip}
+% Créé la longueur qui stockera la longueur max
+% de la citation
+\newlength\longest
 
 \begin{document}
 \pagenumbering{gobble}
@@ -33,12 +34,48 @@
 % Select the content language following this line
 \selectlanguage{french}
 
+%%%%%%%% Remerciement
+
 % Inclusion du chapitre remerciement
 % Input acknowledgement chapter
-% \clearemptydoublepage
-% \input{./01-Acknowledgement/acknowledgement}
+\clearemptydoublepage
+{
+  \sffamily
+  \input{./01-Acknowledgement/acknowledgement}
+}
 
 \clearemptydoublepage
+
+%%%%%%%% Citation
+
+% Doit être dans son propre environnement
+% Sinon modifie la mise en page.
+{
+\thispagestyle{empty}
+\null\vfill
+
+\settowidth\longest{\Large\itshape I don't know anything, but I do know that}
+\centering
+\parbox{\longest}{%
+  \rmfamily
+  \raggedright{\Large\itshape%
+  I don't know anything, but I do know that\\
+  everything is interesting if you go into it\\
+  deeply enough.\par\bigskip
+  }
+  \raggedleft\large\MakeUppercase{Richard Feynman}\par%
+}
+
+\vfill\vfill
+
+% Remets la mise en page d'origine (sans le style citation)
+\clearpage
+\pagestyle{plain}
+}
+%%%%%%%% Table des matières
+
+\clearemptydoublepage
+
 % Ne pas oublier cette commande qui g\'{e}n\`{e}re la page de couverture avant
 % This command will generate the front cover
 \frontmatter
@@ -51,16 +88,14 @@
 
 \mainmatter
 
-\setlength{\parskip}{\baselineskip}
-
-%%%%%%%%% Introduction
+%%%%%%%% Introduction
 
 \input{./02-Introduction/introduction}
 \clearpage
-% \printbibliography[heading=subbibintoc, title={Bibliographie}]
+
 \clearemptydoublepage
 
-%%%%%%%%% Chapter 1
+%%%%%%%% Chapter 1
 
 \input{./03-Chapitre1/chapitre1}
 \clearpage
@@ -71,7 +106,7 @@
 
 \clearemptydoublepage
 
-%%%%%%%%% Chapter 2
+%%%%%%%% Chapter 2
 
 \input{./03-Chapitre2/chapitre2}
 \clearpage
@@ -82,7 +117,7 @@
 
 \clearemptydoublepage
 
-%%%%%%%%% Chapter 3
+%%%%%%%% Chapter 3
 
 \input{./03-Chapitre3/chapitre3}
 \clearpage
@@ -97,14 +132,11 @@
 
 \input{./04-Conclusion/conclusion}
 
-% % \subsection*{Bibliographie}
-% % \printbibliography[heading=none]
-
 \clearemptydoublepage
 
 %%%%%%%% Quatrieme de couverture
 
-\setlength{\parskip}{\originalparskip}\togglefalse{sectionnewpage}\backmatter
+\backmatter
 
 \clearemptydoublepage
 % Pour avoir la quatrième de couverture sur une page paire

@@ -52,6 +52,7 @@
 \RequirePackage{comment}
 \RequirePackage{wallpaper}
 \RequirePackage{float}
+\usepackage[skip=11pt, indent=12pt]{parskip}
 \RequirePackage[inner=30mm,outer=20mm,top=30mm,bottom=20mm]{geometry}
 %Ou bien : \RequirePackage[top=4 cm, bottom=4 cm, left=3 cm, right=3 cm]{geometry} % On peut modifier ces valeurs pour augmenter ou r\'{e}duire les marges. Attention aux en-têtes de chapitres. 
 \RequirePackage{pdflscape}
@@ -88,6 +89,9 @@
 \usepackage{multirow}
 \RequirePackage{calc} % for calculating minipage widths
 \RequirePackage{caption}
+\captionsetup{font=small,labelfont=bf, textfont=it, singlelinecheck=false}
+\DeclareCaptionLabelFormat{continued}{Continued #1 #2}
+\captionsetup[ContinuedFloat]{labelformat=continued}
 % Make caption package work with longtable
 \makeatletter
 \def\fnum@table{\tablename~\thetable}
@@ -107,28 +111,6 @@
 % \def\fps@figure{htbp}
 \def\fps@figure{H}
 \makeatother
-
-% Page break before a new section
-%% Except if preceded by a chapter
-\RequirePackage{etoolbox}
-
-\newtoggle{chapterjustused}
-\newtoggle{sectionnewpage}
-
-\togglefalse{chapterjustused} % Initial state: chapter was not just used
-\toggletrue{sectionnewpage}   % Initial state: sections start on new pages
-
-% Toggle on before a chapter
-\pretocmd{\chapter}{\toggletrue{chapterjustused}}{}{}
-
-% Conditionally add page break before a section and reset toggle
-\pretocmd{\section}{
-  \iftoggle{sectionnewpage}{
-    \iftoggle{chapterjustused}{}{\clearpage}
-  }{}
-  \togglefalse{chapterjustused}
-}{}{}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%% CONDITIONAL COMPILATION %%%%%%%%%%%%%%%
@@ -211,10 +193,11 @@
 \RequirePackage[hyperref,backend=biber,
   % Exemples de styles: alphabetic, ieee, nature, numeric, verbose-trad1 (en utilisant \footcite{}).
   % https://www.overleaf.com/learn/latex/Biblatex_bibliography_styles
-  style=apa, %refsection=chapter
-  ]{biblatex}
+  style=apa, uniquename=false,%refsection=chapter
+  uniquelist=false, maxcitenames=2, mincitenames=1]{biblatex}
   \renewcommand*{\citesetup}{\small}
-  \renewcommand*{\bibfont}{\small}
+  \renewcommand*{\bibfont}{\footnotesize}
+  % \AtBeginBibliography{\footnotesize}
 
 % Style biblatex avec gestion des mots cl\'{e}s des entr\'{e}es bibliographiques
 % + les abbr\'{e}viations idem, ibidem, op cit. Pr\'{e}voir un fichier bib
@@ -496,7 +479,7 @@
 }
 
 \newcommand{\titleFR}[1]{%
-\vspace{1cm}
+\vspace{0.5cm}
 {\centering \noindent \textcolor{couleur-ecole-verso}{\rule{\textwidth}{0.2cm}}}
 \vspace{-1cm}
 \selectlanguage{french}
@@ -505,7 +488,7 @@
 
 \newcommand{\keywordsFR}[1]{%
 \vspace{-0.2cm}
-\noindent{\smallTwelve \textbf{Mot cl\'{e}s : }#1}
+\noindent{\footnotesizeTwelve \textbf{Mot cl\'{e}s : }#1}
 }
 
 \newcommand{\abstractFR}[1]{%
@@ -518,7 +501,7 @@
 }
 
 \newcommand{\titleEN}[1]{%
-\vspace{0.5cm}
+\vspace{-0.5cm}
 {\centering \noindent \textcolor{couleur-ecole-verso}{\rule{\textwidth}{0.2cm}}}
 \vspace{-1cm}
 \selectlanguage{english}
@@ -527,7 +510,7 @@
 
 \newcommand{\keywordsEN}[1]{%
 \vspace{-0.2cm}
-\noindent{\smallTwelve \textbf{Keywords: }#1}
+\noindent{\footnotesizeTwelve \textbf{Keywords: }#1}
 }
 
 \newcommand{\abstractEN}[1]{%
