@@ -194,7 +194,7 @@
   % Exemples de styles: alphabetic, ieee, nature, numeric, verbose-trad1 (en utilisant \footcite{}).
   % https://www.overleaf.com/learn/latex/Biblatex_bibliography_styles
   style=apa, uniquename=false,%refsection=chapter
-  uniquelist=false, maxcitenames=2, mincitenames=1]{biblatex}
+  uniquelist=false, maxcitenames=2, mincitenames=1, maxbibnames=9999]{biblatex}
   \renewcommand*{\citesetup}{\small}
   \renewcommand*{\bibfont}{\footnotesize}
   % \AtBeginBibliography{\footnotesize}
